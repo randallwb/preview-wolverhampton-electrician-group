@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#F7F8FA; overflow-x:clip; }
+  html { scroll-behavior:smooth; }
+  [id] { scroll-margin-top:88px; }
+  /* Mobile: collapse nav links (phone + CTA remain) */
+  @media (max-width: 1020px) {
+    [data-nav-links] { display:none !important; }
+  }
+  @media (max-width: 620px) {
+    [data-nav-cta] { display:none !important; }
+  }
+  /* Accessibility: honor reduced-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+    [data-anim="true"] [data-reveal] { opacity:1 !important; transform:none !important; }
+  }
+  a { color:#1B4A8A; }
+  a:hover { color:#143A6E; }
+  /* ---- TEMPLATE PLACEHOLDER HIGHLIGHTING ----
+     Every element with data-ph="[TOKEN]" must be swapped for the real company.
+     Remove the data-ph attribute once swapped, or use the
+     "Hide placeholder highlights" tweak to preview the final look. */
+  [data-ph] { outline:2px dashed #FF00D4; outline-offset:4px; position:relative; }
+  [data-ph]::before { content:attr(data-ph); position:absolute; top:-22px; left:0; font-family:'IBM Plex Mono',monospace; font-size:10px; line-height:1; background:#FF00D4; color:#fff; padding:3px 6px; border-radius:3px; z-index:40; white-space:nowrap; }
+  [data-ph-hide="true"] [data-ph] { outline:none; }
+  [data-ph-hide="true"] [data-ph]::before { display:none; }
+  /* ---- scroll reveal (JS flips data-reveal to "on") ---- */
+  [data-reveal] { transition:opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1); }
+  [data-anim="true"] [data-reveal] { opacity:0; transform:translateY(26px); }
+  [data-anim="true"] [data-reveal][data-reveal-dir="left"] { transform:translateX(-30px); }
+  [data-anim="true"] [data-reveal][data-reveal-dir="right"] { transform:translateX(30px); }
+  [data-anim="true"] [data-reveal="on"], [data-anim="true"] [data-reveal="on"][data-reveal-dir] { opacity:1; transform:none; }
+  /* nav shadow fades in once scrolled */
+  [data-navbar] { transition:box-shadow .35s ease; }
+  [data-navbar][data-scrolled="true"] { box-shadow:0 6px 24px rgba(21,34,56,.09); }
+  @keyframes blobDrift { from { transform:translate(0,0) scale(1); } to { transform:translate(60px,-40px) scale(1.12); } }
+  @keyframes faqIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+  details[open] .faq-a { animation:faqIn .35s ease both; }
+  @keyframes heroPop { from { opacity:0; transform:translateY(22px);} to { opacity:1; transform:none;} }
+  @keyframes tracePulse { 0%,100% { opacity:.35; } 50% { opacity:1; } }
+  @keyframes pinPing { 0% { transform:scale(1); opacity:.5; } 100% { transform:scale(2.8); opacity:0; } }
+  details > summary { list-style:none; cursor:pointer; }
+  details > summary::-webkit-details-marker { display:none; }
+  details[open] .faq-chev { transform:rotate(45deg); }
+  .faq-chev { transition:transform .3s ease; display:inline-block; }
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" data-ph-hide="{{ phHide }}" data-anim="{{ animOn }}" style="background:#F7F8FA; color:#152238; font-family:'Manrope',sans-serif; -webkit-font-smoothing:antialiased;">
+<div style="position:sticky; top:0; z-index:60; background:#152238; color:#fff; text-align:center; padding:9px 16px; font-family:'Manrope',sans-serif; font-size:13.5px; font-weight:600;">Draft preview built for Wolverhampton Electrician Group — goes live on your own domain within 24h of approval. Preview expires Tuesday 14 July.</div>
+
+  <!-- ================= NAV ================= -->
+  <div data-screen-label="Nav" data-navbar style="position:sticky; top:0; z-index:50; background:rgba(255,255,255,.92); backdrop-filter:blur(12px); border-bottom:1px solid #E4E8EF;">
+    <div style="max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px clamp(16px,3vw,32px);">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div style="width:38px; height:38px; border-radius:10px; background:#1B4A8A; color:#fff; display:flex; align-items:center; justify-content:center; font-family:'Sora',sans-serif; font-weight:800; font-size:17px;">W</div>
+        <span style="font-family:'Sora',sans-serif; font-weight:800; font-size:19px;">Wolverhampton Electrician Group</span>
+      </div>
+      <div data-nav-links style="display:flex; gap:30px; font-size:15px; font-weight:600;">
+        <a href="#services" style="text-decoration:none; color:#4A5A72; padding-bottom:3px; background-image:linear-gradient(#1B4A8A,#1B4A8A); background-size:0% 2px; background-repeat:no-repeat; background-position:0 100%; transition:background-size .3s ease, color .3s ease;" style-hover="background-size:100% 2px; color:#1B4A8A;">Services</a>
+        <a href="#about" style="text-decoration:none; color:#4A5A72; padding-bottom:3px; background-image:linear-gradient(#1B4A8A,#1B4A8A); background-size:0% 2px; background-repeat:no-repeat; background-position:0 100%; transition:background-size .3s ease, color .3s ease;" style-hover="background-size:100% 2px; color:#1B4A8A;">About</a>
+        <a href="#reviews" style="text-decoration:none; color:#4A5A72; padding-bottom:3px; background-image:linear-gradient(#1B4A8A,#1B4A8A); background-size:0% 2px; background-repeat:no-repeat; background-position:0 100%; transition:background-size .3s ease, color .3s ease;" style-hover="background-size:100% 2px; color:#1B4A8A;">Reviews</a>
+        <a href="#areas" style="text-decoration:none; color:#4A5A72; padding-bottom:3px; background-image:linear-gradient(#1B4A8A,#1B4A8A); background-size:0% 2px; background-repeat:no-repeat; background-position:0 100%; transition:background-size .3s ease, color .3s ease;" style-hover="background-size:100% 2px; color:#1B4A8A;">Areas</a>
+        <a href="#faq" style="text-decoration:none; color:#4A5A72; padding-bottom:3px; background-image:linear-gradient(#1B4A8A,#1B4A8A); background-size:0% 2px; background-repeat:no-repeat; background-position:0 100%; transition:background-size .3s ease, color .3s ease;" style-hover="background-size:100% 2px; color:#1B4A8A;">FAQ</a>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <a href="tel:+447****4540 style="font-weight:800; font-size:15px; color:#1B4A8A; text-decoration:none;">+447****4540</a>
+        <a data-nav-cta href="#contact" style="background:#F5A623; color:#152238; font-weight:700; padding:12px 22px; border-radius:10px; font-size:15px; text-decoration:none; display:inline-block; white-space:nowrap;" style-hover="background:#E79A15;">Book an electrician</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= EMERGENCY STRIP ================= -->
+  <sc-if value="{{ showEmergency }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#152238; color:#fff; text-align:center; padding:10px 32px; font-size:14px; font-weight:600;">
+      24/7 emergency call-outs — <span style="color:#F5A623; font-weight:800;">+447****4540</span>
+    </div>
+  </sc-if>
+
+  <!-- ================= HERO ================= -->
+  <div data-screen-label="Hero" style="position:relative; isolation:isolate; max-width:1240px; margin:0 auto; display:flex; flex-direction:column; align-items:center; text-align:center; padding:clamp(64px,9vw,96px) 24px clamp(72px,10vw,104px);">
+    <div style="position:absolute; z-index:-1; left:8%; top:6%; width:440px; height:440px; max-width:70vw; border-radius:50%; background:radial-gradient(circle, rgba(27,74,138,.09), transparent 65%); animation:blobDrift 16s ease-in-out infinite alternate; pointer-events:none;"></div>
+    <div style="position:absolute; z-index:-1; right:6%; bottom:0; width:380px; height:380px; max-width:60vw; border-radius:50%; background:radial-gradient(circle, rgba(245,166,35,.10), transparent 65%); animation:blobDrift 13s ease-in-out 1.5s infinite alternate-reverse; pointer-events:none;"></div>
+    <div style="display:inline-flex; align-items:center; gap:8px; background:#E8F0FB; color:#1B4A8A; font-weight:700; font-size:13px; padding:7px 14px; border-radius:999px; margin-bottom:26px; animation:heroPop .7s ease both;"><span>4.9 rated · 300+ local reviews</span> · <span>Wolverhampton</span></div>
+    <h1 style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(38px,7vw,64px); line-height:1.08; letter-spacing:-.02em; margin:0 0 24px; max-width:880px; animation:heroPop .7s ease .08s both;"><span>Wolverhampton's trusted NAPIT-approved electricians</span></h1>
+    <p style="font-size:20px; line-height:1.6; color:#4A5A72; margin:0 0 36px; max-width:620px; animation:heroPop .7s ease .16s both;"><span>Upfront pricing, tidy work and every job certified. Serving Wolverhampton &amp; the West Midlands since 2008.</span></p>
+    <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; animation:heroPop .7s ease .24s both;">
+      <a href="#contact" style="background:#1B4A8A; color:#fff; font-weight:700; font-size:17px; padding:16px 30px; border-radius:12px; text-decoration:none; display:inline-block; box-shadow:0 8px 20px rgba(27,74,138,.25); transition:transform .25s ease, background .25s ease;" style-hover="background:#143A6E; transform:translateY(-2px);">Get a free quote</a>
+      <a href="#services" style="border:2px solid #D5DCE7; color:#152238; font-weight:700; font-size:17px; padding:14px 28px; border-radius:12px; text-decoration:none; display:inline-block; transition:border-color .25s ease;" style-hover="border-color:#1B4A8A;">See services</a>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:14px 28px; margin-top:40px; font-size:13.5px; font-weight:700; color:#4A5A72; justify-content:center; animation:heroPop .7s ease .32s both;">
+      <span style="display:flex; align-items:center; gap:8px;"><span style="width:7px; height:7px; border-radius:50%; background:#F5A623; display:inline-block;"></span>NAPIT approved &amp; fully insured</span>
+      <span style="display:flex; align-items:center; gap:8px;"><span style="width:7px; height:7px; border-radius:50%; background:#F5A623; display:inline-block;"></span>Same-week booking</span>
+      <span style="display:flex; align-items:center; gap:8px;"><span style="width:7px; height:7px; border-radius:50%; background:#F5A623; display:inline-block;"></span>Workmanship guaranteed on every job</span>
+    </div>
+  </div>
+
+  <!-- ================= CERTIFICATIONS STRIP ================= -->
+  <div data-screen-label="Certifications" style="background:#fff; border-top:1px solid #E4E8EF; border-bottom:1px solid #E4E8EF;">
+    <div data-reveal style="max-width:1240px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:20px 32px; padding:28px 24px;">
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#8A97AB; flex-shrink:0;">Certified &amp; accredited</span>
+      <div style="display:flex; flex-wrap:wrap; gap:14px 20px; flex:1; justify-content:flex-end;">
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-width:150px; height:56px; border-radius:8px; background:#F0F3F8; padding:0 18px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-3px); box-shadow:0 8px 18px rgba(21,34,56,.08);">
+          <span style="font-family:'Sora',sans-serif; font-weight:800; font-size:14px;">NAPIT</span>
+          <span style="font-size:10.5px; font-weight:700; color:#6B7A92; letter-spacing:.05em; text-transform:uppercase;">Approved Contractor</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-width:150px; height:56px; border-radius:8px; background:#F0F3F8; padding:0 18px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-3px); box-shadow:0 8px 18px rgba(21,34,56,.08);">
+          <span style="font-family:'Sora',sans-serif; font-weight:800; font-size:14px;">TrustMark</span>
+          <span style="font-size:10.5px; font-weight:700; color:#6B7A92; letter-spacing:.05em; text-transform:uppercase;">Government Endorsed</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; min-width:150px; height:56px; border-radius:8px; background:#F0F3F8; padding:0 18px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-3px); box-shadow:0 8px 18px rgba(21,34,56,.08);">
+          <span style="font-family:'Sora',sans-serif; font-weight:800; font-size:14px;">Part P</span>
+          <span style="font-size:10.5px; font-weight:700; color:#6B7A92; letter-spacing:.05em; text-transform:uppercase;">Building Regs Certified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SERVICES ================= -->
+  <div id="services" data-screen-label="Services" style="max-width:1240px; margin:0 auto; padding:clamp(64px,9vw,96px) 24px;">
+    <div data-reveal style="max-width:640px; margin-bottom:48px;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#1B4A8A; margin-bottom:14px;">Services</div>
+      <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(30px,4.5vw,40px); line-height:1.15; letter-spacing:-.02em; margin:0 0 16px; text-wrap:pretty;">Everything electrical, done right</h2>
+      <p style="font-size:17px; line-height:1.6; color:#4A5A72; margin:0;"><span>From a single socket to a full commercial fit-out — one NAPIT-approved team, one point of contact.</span></p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;">
+      <div data-reveal style="background:#fff; border:1px solid #E4E8EF; border-radius:16px; padding:30px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-4px); box-shadow:0 14px 32px rgba(21,34,56,.08);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#F5A623; margin-bottom:16px; border-bottom:2px solid #F5A623; display:inline-block; padding-bottom:4px;">01</div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:19px; margin-bottom:8px;"><span>Rewiring &amp; repairs</span></div>
+        <div style="color:#4A5A72; font-size:15px; line-height:1.55;"><span>Full and partial rewires, consumer unit upgrades, fault-finding and socket repairs.</span></div>
+      </div>
+      <div data-reveal style="background:#fff; border:1px solid #E4E8EF; border-radius:16px; padding:30px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-4px); box-shadow:0 14px 32px rgba(21,34,56,.08);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#F5A623; margin-bottom:16px; border-bottom:2px solid #F5A623; display:inline-block; padding-bottom:4px;">02</div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:19px; margin-bottom:8px;"><span>EV charger installation</span></div>
+        <div style="color:#4A5A72; font-size:15px; line-height:1.55;"><span>Home and workplace charging points, installed and certified to spec.</span></div>
+      </div>
+      <div data-reveal style="background:#fff; border:1px solid #E4E8EF; border-radius:16px; padding:30px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-4px); box-shadow:0 14px 32px rgba(21,34,56,.08);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#F5A623; margin-bottom:16px; border-bottom:2px solid #F5A623; display:inline-block; padding-bottom:4px;">03</div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:19px; margin-bottom:8px;"><span>Lighting design &amp; install</span></div>
+        <div style="color:#4A5A72; font-size:15px; line-height:1.55;"><span>Indoor, outdoor and smart lighting — planned, wired and finished cleanly.</span></div>
+      </div>
+      <div data-reveal style="background:#fff; border:1px solid #E4E8EF; border-radius:16px; padding:30px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-4px); box-shadow:0 14px 32px rgba(21,34,56,.08);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#F5A623; margin-bottom:16px; border-bottom:2px solid #F5A623; display:inline-block; padding-bottom:4px;">04</div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:19px; margin-bottom:8px;"><span>Commercial electrical</span></div>
+        <div style="color:#4A5A72; font-size:15px; line-height:1.55;"><span>Offices, retail and industrial installations, delivered on schedule.</span></div>
+      </div>
+      <div data-reveal style="background:#fff; border:1px solid #E4E8EF; border-radius:16px; padding:30px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-4px); box-shadow:0 14px 32px rgba(21,34,56,.08);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#F5A623; margin-bottom:16px; border-bottom:2px solid #F5A623; display:inline-block; padding-bottom:4px;">05</div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:19px; margin-bottom:8px;"><span>EICR testing &amp; certs</span></div>
+        <div style="color:#4A5A72; font-size:15px; line-height:1.55;"><span>Safety inspections, condition reports and landlord certificates.</span></div>
+      </div>
+      <div data-reveal style="background:#152238; color:#fff; border-radius:16px; padding:30px; transition:transform .3s ease, box-shadow .3s ease;" style-hover="transform:translateY(-4px); box-shadow:0 14px 32px rgba(21,34,56,.25);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#F5A623; margin-bottom:16px; border-bottom:2px solid #F5A623; display:inline-block; padding-bottom:4px;">24/7</div>
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:19px; margin-bottom:8px; color:#F5A623;">Emergency call-out</div>
+        <div style="color:#B9C4D6; font-size:15px; line-height:1.55;">Power cut, burning smell, tripping breakers? Call <span style="color:#fff; font-weight:700;">+447****4540</span> — rapid response, day or night.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= STATS BAND ================= -->
+  <div data-screen-label="Stats" style="background:#1B4A8A; color:#fff;">
+    <div data-reveal style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:32px; padding:64px 24px;">
+      <div style="text-align:center;">
+        <div data-count-to="15" data-suffix="+" style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(38px,5.5vw,52px); letter-spacing:-.02em;">15+</div>
+        <div style="font-size:15px; font-weight:600; color:#B9CCE6; margin-top:6px;">Years in business</div>
+      </div>
+      <div style="text-align:center;">
+        <div data-count-to="1200" data-suffix="+" style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(38px,5.5vw,52px); letter-spacing:-.02em;">1,200+</div>
+        <div style="font-size:15px; font-weight:600; color:#B9CCE6; margin-top:6px;">Jobs completed</div>
+      </div>
+      <div style="text-align:center;">
+        <div data-count-to="97" data-suffix="%" style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(38px,5.5vw,52px); letter-spacing:-.02em;">97%</div>
+        <div style="font-size:15px; font-weight:600; color:#B9CCE6; margin-top:6px;">Repeat &amp; referral clients</div>
+      </div>
+      <div style="text-align:center;">
+        <div data-count-to="6" data-suffix="" style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(38px,5.5vw,52px); letter-spacing:-.02em;">6</div>
+        <div style="font-size:15px; font-weight:600; color:#B9CCE6; margin-top:6px;">Qualified electricians</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ABOUT / WHY US ================= -->
+  <div id="about" data-screen-label="About" style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(36px,5vw,64px); padding:clamp(64px,9vw,96px) 24px; align-items:center;">
+    <div data-reveal data-reveal-dir="left" style="border-radius:20px;">
+      <!-- Final decorative graphic — nothing to swap here -->
+      <svg width="100%" height="430" viewBox="0 0 560 430" style="display:block; border-radius:20px;">
+        <rect width="560" height="430" fill="#E8F0FB"></rect>
+        <g fill="#fff" stroke="#C9D6E8" stroke-width="1.5">
+          <rect x="60" y="56" width="200" height="130" rx="12"></rect>
+          <rect x="280" y="56" width="220" height="130" rx="12"></rect>
+          <rect x="60" y="206" width="290" height="168" rx="12"></rect>
+          <rect x="370" y="206" width="130" height="168" rx="12"></rect>
+        </g>
+        <g fill="#1B4A8A">
+          <rect x="84" y="86" width="34" height="70" rx="7"></rect>
+          <rect x="128" y="86" width="34" height="70" rx="7"></rect>
+          <rect x="172" y="86" width="34" height="70" rx="7" fill="#F5A623"></rect>
+        </g>
+        <g fill="none" stroke="#5B84C4" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="310,96 400,96 400,146 470,146"></polyline>
+          <polyline points="90,246 90,330 240,330"></polyline>
+        </g>
+        <g fill="none" stroke="#F5A623" stroke-width="3" stroke-linecap="round" style="animation:tracePulse 3.2s ease-in-out infinite;">
+          <polyline points="120,246 200,246 200,290 300,290"></polyline>
+        </g>
+        <g>
+          <circle cx="470" cy="146" r="6" fill="#F5A623"></circle>
+          <circle cx="300" cy="290" r="6" fill="#F5A623"></circle>
+          <circle cx="240" cy="330" r="5" fill="#5B84C4"></circle>
+          <circle cx="310" cy="96" r="5" fill="#5B84C4"></circle>
+          <circle cx="120" cy="246" r="5" fill="#5B84C4"></circle>
+          <circle cx="435" cy="250" r="16" fill="none" stroke="#1B4A8A" stroke-width="2.5"></circle>
+          <circle cx="435" cy="250" r="5" fill="#1B4A8A"></circle>
+          <circle cx="435" cy="320" r="16" fill="none" stroke="#F5A623" stroke-width="2.5"></circle>
+          <circle cx="435" cy="320" r="5" fill="#F5A623"></circle>
+        </g>
+      </svg>
+    </div>
+    <div data-reveal data-reveal-dir="right">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#1B4A8A; margin-bottom:14px;">Why choose us</div>
+      <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(30px,4.5vw,40px); line-height:1.15; letter-spacing:-.02em; margin:0 0 18px;"><span>A local Wolverhampton team you can rely on</span></h2>
+      <p style="font-size:17px; line-height:1.65; color:#4A5A72; margin:0 0 28px;"><span>Wolverhampton Electrician Group is a NAPIT-approved electrical contractor based in Wolverhampton. Since 2008, we've built our reputation on tidy workmanship, honest pricing and turning up when we say we will.</span></p>
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div style="display:flex; gap:14px; align-items:flex-start;">
+          <div style="width:8px; height:8px; border-radius:50%; background:#F5A623; margin-top:7px; flex-shrink:0;"></div>
+          <div><strong style="font-size:15.5px;">Upfront, fixed quotes</strong><div style="font-size:14.5px; color:#4A5A72; margin-top:2px;">No hourly surprises — you approve the price before we start.</div></div>
+        </div>
+        <div style="display:flex; gap:14px; align-items:flex-start;">
+          <div style="width:8px; height:8px; border-radius:50%; background:#F5A623; margin-top:7px; flex-shrink:0;"></div>
+          <div><strong style="font-size:15.5px;">Fully qualified &amp; insured</strong><div style="font-size:14.5px; color:#4A5A72; margin-top:2px;">Every job notified and certified under Part P. NAPIT reg. <span>NAPIT 34589</span>.</div></div>
+        </div>
+        <div style="display:flex; gap:14px; align-items:flex-start;">
+          <div style="width:8px; height:8px; border-radius:50%; background:#F5A623; margin-top:7px; flex-shrink:0;"></div>
+          <div><strong style="font-size:15.5px;">We leave it cleaner than we found it</strong><div style="font-size:14.5px; color:#4A5A72; margin-top:2px;">Dust sheets, tidy cable runs, and a walkthrough before we leave.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <div id="reviews" data-screen-label="Testimonials" style="background:#fff; border-top:1px solid #E4E8EF; border-bottom:1px solid #E4E8EF;">
+    <div style="max-width:1240px; margin:0 auto; padding:clamp(64px,9vw,96px) 24px;">
+      <div data-reveal style="text-align:center; margin-bottom:48px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#1B4A8A; margin-bottom:14px;">Reviews</div>
+        <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(30px,4.5vw,40px); letter-spacing:-.02em; margin:0;">What neighbours say</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;">
+        <div data-reveal style="background:#F7F8FA; border:1px solid #E4E8EF; border-radius:16px; padding:28px;">
+          <div style="font-family:'IBM Plex Mono',monospace; color:#F5A623; font-size:13px; font-weight:700; margin-bottom:14px;">5.0 / 5</div>
+          <p style="font-size:15.5px; line-height:1.65; color:#152238; margin:0 0 20px;">"They rewired our 1930s Wolverhampton semi start to finish in five days — tidy, polite, and the price never moved."</p>
+          <div style="font-weight:700; font-size:14px;">Mark T.</div>
+          <div style="font-size:13px; color:#8A97AB;">Wolverhampton</div>
+        </div>
+        <div data-reveal style="background:#F7F8FA; border:1px solid #E4E8EF; border-radius:16px; padding:28px;">
+          <div style="font-family:'IBM Plex Mono',monospace; color:#F5A623; font-size:13px; font-weight:700; margin-bottom:14px;">5.0 / 5</div>
+          <p style="font-size:15.5px; line-height:1.65; color:#152238; margin:0 0 20px;">"Lost power on a Sunday night and they were here within the hour — absolute lifesavers."</p>
+          <div style="font-weight:700; font-size:14px;">Priya R.</div>
+          <div style="font-size:13px; color:#8A97AB;">Walsall</div>
+        </div>
+        <div data-reveal style="background:#F7F8FA; border:1px solid #E4E8EF; border-radius:16px; padding:28px;">
+          <div style="font-family:'IBM Plex Mono',monospace; color:#F5A623; font-size:13px; font-weight:700; margin-bottom:14px;">5.0 / 5</div>
+          <p style="font-size:15.5px; line-height:1.65; color:#152238; margin:0 0 20px;">"Fitted three EV chargers at our depot over a weekend with minimal disruption — all certified."</p>
+          <div style="font-weight:700; font-size:14px;">Dave H.</div>
+          <div style="font-size:13px; color:#8A97AB;">Dudley</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SERVICE AREA ================= -->
+  <div id="areas" data-screen-label="Service area" style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(36px,5vw,64px); padding:clamp(64px,9vw,96px) 24px; align-items:center;">
+    <div data-reveal data-reveal-dir="left">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#1B4A8A; margin-bottom:14px;">Coverage</div>
+      <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(30px,4.5vw,40px); line-height:1.15; letter-spacing:-.02em; margin:0 0 18px;">Serving <span>Wolverhampton &amp; the West Midlands</span> and surrounds</h2>
+      <p style="font-size:17px; line-height:1.65; color:#4A5A72; margin:0 0 28px;">Standard call-outs within <span>30 miles</span> of our base — no travel charge inside the core area.</p>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <span style="width:16px; height:16px; border-radius:50%; border:2px dashed #F5A623; flex-shrink:0;"></span>
+          <span style="font-size:15px; font-weight:600;">Core area — free call-outs, no travel charge</span>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <span style="width:16px; height:16px; border-radius:50%; border:2px dashed #1B4A8A; flex-shrink:0;"></span>
+          <span style="font-size:15px; font-weight:600;">Extended area — standard call-out rates</span>
+        </div>
+      </div>
+    </div>
+    <div data-reveal data-reveal-dir="right" style="position:relative; height:420px; border-radius:20px; background:#E8F0FB; background-image:radial-gradient(#C9D6E8 2px, transparent 2px); background-size:36px 36px; overflow:hidden;">
+      <div style="position:absolute; left:50%; top:50%; width:360px; height:360px; transform:translate(-50%,-50%); border:2px dashed #1B4A8A; border-radius:50%; opacity:.35;"></div>
+      <div style="position:absolute; left:50%; top:50%; width:200px; height:200px; transform:translate(-50%,-50%); border:2px dashed #F5A623; border-radius:50%; opacity:.55;"></div>
+      <!-- HQ pin -->
+      <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:8px; z-index:2;">
+        <div style="position:relative; width:18px; height:18px;">
+          <div style="position:absolute; inset:0; border-radius:50%; background:#1B4A8A; animation:pinPing 2.6s ease-out infinite;"></div>
+          <div style="position:absolute; inset:0; border-radius:50%; background:#1B4A8A; border:3px solid #fff; box-sizing:border-box;"></div>
+        </div>
+        <div style="background:#152238; color:#fff; padding:5px 12px; border-radius:999px; font-size:12px; font-weight:700; white-space:nowrap;">HQ · <span>Wolverhampton</span></div>
+      </div>
+      <!-- Town pins — swap the [TOWN_x] labels; reposition via left/top percentages -->
+      <div style="position:absolute; left:17%; top:18%; display:flex; flex-direction:column; align-items:center; gap:6px;">
+        <div style="position:relative; width:12px; height:12px;">
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623; animation:pinPing 2.6s ease-out .4s infinite;"></div>
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623;"></div>
+        </div>
+        <span style="background:#fff; border:1px solid #D5DCE7; border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; white-space:nowrap;">Walsall</span>
+      </div>
+      <div style="position:absolute; left:66%; top:12%; display:flex; flex-direction:column; align-items:center; gap:6px;">
+        <div style="position:relative; width:12px; height:12px;">
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623; animation:pinPing 2.6s ease-out .8s infinite;"></div>
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623;"></div>
+        </div>
+        <span style="background:#fff; border:1px solid #D5DCE7; border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; white-space:nowrap;">Dudley</span>
+      </div>
+      <div style="position:absolute; left:76%; top:56%; display:flex; flex-direction:column; align-items:center; gap:6px;">
+        <div style="position:relative; width:12px; height:12px;">
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623; animation:pinPing 2.6s ease-out 1.2s infinite;"></div>
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623;"></div>
+        </div>
+        <span style="background:#fff; border:1px solid #D5DCE7; border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; white-space:nowrap;">Birmingham</span>
+      </div>
+      <div style="position:absolute; left:16%; top:62%; display:flex; flex-direction:column; align-items:center; gap:6px;">
+        <div style="position:relative; width:12px; height:12px;">
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623; animation:pinPing 2.6s ease-out 1.6s infinite;"></div>
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623;"></div>
+        </div>
+        <span style="background:#fff; border:1px solid #D5DCE7; border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; white-space:nowrap;">Cannock</span>
+      </div>
+      <div style="position:absolute; left:48%; top:78%; display:flex; flex-direction:column; align-items:center; gap:6px;">
+        <div style="position:relative; width:12px; height:12px;">
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623; animation:pinPing 2.6s ease-out 2s infinite;"></div>
+          <div style="position:absolute; inset:0; border-radius:50%; background:#F5A623;"></div>
+        </div>
+        <span style="background:#fff; border:1px solid #D5DCE7; border-radius:999px; padding:4px 12px; font-size:12px; font-weight:700; white-space:nowrap;">Sedgley</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FAQ ================= -->
+  <div id="faq" data-screen-label="FAQ" style="background:#fff; border-top:1px solid #E4E8EF;">
+    <div style="max-width:840px; margin:0 auto; padding:clamp(64px,9vw,96px) 24px;">
+      <div data-reveal style="text-align:center; margin-bottom:44px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#1B4A8A; margin-bottom:14px;">FAQ</div>
+        <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(30px,4.5vw,40px); letter-spacing:-.02em; margin:0;">Common questions</h2>
+      </div>
+      <div data-reveal style="display:flex; flex-direction:column; gap:12px;">
+        <details style="background:#F7F8FA; border:1px solid #E4E8EF; border-radius:14px; padding:20px 24px;">
+          <summary style="display:flex; justify-content:space-between; align-items:center; font-family:'Sora',sans-serif; font-weight:700; font-size:17px;">Do you charge for quotes?<span class="faq-chev" style="color:#1B4A8A; font-size:20px; font-weight:400;">+</span></summary>
+          <p class="faq-a" style="font-size:15.5px; line-height:1.6; color:#4A5A72; margin:14px 0 0;"><span>No — quotes and site visits are free within our 30-mile service area, with no obligation.</span></p>
+        </details>
+        <details style="background:#F7F8FA; border:1px solid #E4E8EF; border-radius:14px; padding:20px 24px;">
+          <summary style="display:flex; justify-content:space-between; align-items:center; font-family:'Sora',sans-serif; font-weight:700; font-size:17px;">Are you registered and insured?<span class="faq-chev" style="color:#1B4A8A; font-size:20px; font-weight:400;">+</span></summary>
+          <p class="faq-a" style="font-size:15.5px; line-height:1.6; color:#4A5A72; margin:14px 0 0;"><span>Yes — NAPIT Approved Contractor (reg. NAPIT 34589), Part P certified, with £5m public liability insurance.</span></p>
+        </details>
+        <details style="background:#F7F8FA; border:1px solid #E4E8EF; border-radius:14px; padding:20px 24px;">
+          <summary style="display:flex; justify-content:space-between; align-items:center; font-family:'Sora',sans-serif; font-weight:700; font-size:17px;">How fast can you come out in an emergency?<span class="faq-chev" style="color:#1B4A8A; font-size:20px; font-weight:400;">+</span></summary>
+          <p class="faq-a" style="font-size:15.5px; line-height:1.6; color:#4A5A72; margin:14px 0 0;"><span>We aim to be on site within 2 hours anywhere in our core area, 24/7.</span></p>
+        </details>
+        <details style="background:#F7F8FA; border:1px solid #E4E8EF; border-radius:14px; padding:20px 24px;">
+          <summary style="display:flex; justify-content:space-between; align-items:center; font-family:'Sora',sans-serif; font-weight:700; font-size:17px;">Is your work guaranteed?<span class="faq-chev" style="color:#1B4A8A; font-size:20px; font-weight:400;">+</span></summary>
+          <p class="faq-a" style="font-size:15.5px; line-height:1.6; color:#4A5A72; margin:14px 0 0;"><span>Yes — every installation carries our workmanship guarantee on top of manufacturer warranties.</span></p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CONTACT / CTA ================= -->
+  <div id="contact" data-screen-label="Contact" style="background:#152238; color:#fff;">
+    <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:clamp(40px,6vw,72px); padding:clamp(64px,9vw,96px) 24px;">
+      <div data-reveal>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#F5A623; margin-bottom:14px;">Get in touch</div>
+        <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(32px,5vw,44px); line-height:1.12; letter-spacing:-.02em; margin:0 0 18px;">Tell us about the job — we'll quote it free</h2>
+        <p style="font-size:17px; line-height:1.65; color:#B9C4D6; margin:0 0 36px;">We reply within one working day. For emergencies, always call.</p>
+        <div style="display:flex; flex-direction:column; gap:22px; font-size:16px;">
+          <div style="display:flex; gap:16px; align-items:baseline;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#8A97AB; width:70px; flex-shrink:0;">Call</span>
+            <a href="tel:+447****4540 style="color:#F5A623; font-weight:800; font-size:20px; text-decoration:none;">+447****4540</a>
+          </div>
+          <div style="display:flex; gap:16px; align-items:baseline;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#8A97AB; width:70px; flex-shrink:0;">Hours</span>
+            <span style="color:#fff; font-weight:600;">Mon–Sat 07:00–19:00 · Emergencies 24/7</span>
+          </div>
+        </div>
+      </div>
+      <div data-reveal style="background:#fff; border-radius:20px; padding:clamp(24px,4vw,36px); color:#152238;">
+        <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:21px; margin-bottom:22px;">Request a free quote</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;">
+          <input placeholder="Your name" style="font-family:'Manrope',sans-serif; font-size:15px; padding:14px 16px; border:1.5px solid #D5DCE7; border-radius:10px; outline:none; width:100%; box-sizing:border-box;" style-focus="border-color:#1B4A8A;">
+          <input placeholder="Phone number" style="font-family:'Manrope',sans-serif; font-size:15px; padding:14px 16px; border:1.5px solid #D5DCE7; border-radius:10px; outline:none; width:100%; box-sizing:border-box;" style-focus="border-color:#1B4A8A;">
+          <input placeholder="Email" style="font-family:'Manrope',sans-serif; font-size:15px; padding:14px 16px; border:1.5px solid #D5DCE7; border-radius:10px; outline:none; width:100%; box-sizing:border-box; grid-column:1 / -1;" style-focus="border-color:#1B4A8A;">
+          <textarea placeholder="What do you need done?" rows="4" style="font-family:'Manrope',sans-serif; font-size:15px; padding:14px 16px; border:1.5px solid #D5DCE7; border-radius:10px; outline:none; width:100%; box-sizing:border-box; grid-column:1 / -1; resize:vertical;" style-focus="border-color:#1B4A8A;"></textarea>
+        </div>
+        <button onClick="{{ submitQuote }}" style="margin-top:18px; width:100%; background:#F5A623; color:#152238; font-family:'Manrope',sans-serif; font-weight:800; font-size:16px; padding:16px; border:none; border-radius:12px; cursor:pointer; transition:background .25s ease;" style-hover="background:#E79A15;">{{ submitLabel }}</button>
+        <div style="font-size:12.5px; color:#8A97AB; margin-top:12px; text-align:center;">No spam, no obligation. <span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <div data-screen-label="Footer" style="background:#0E1829; color:#8A97AB;">
+    <div style="max-width:1240px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; padding:28px 24px; font-size:13.5px;">
+      <span>© <span>2026</span> <span>Wolverhampton Electrician Group Ltd</span> · Registered in England &amp; Wales, Company No. <span>06849213</span> · NAPIT reg. <span>NAPIT 34589</span></span>
+      <div style="display:flex; gap:24px;">
+        <a href="#" style="color:#8A97AB; text-decoration:none;">Privacy</a>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;hidePlaceholderHighlights&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Template&quot; },
+  &quot;showEmergencyBar&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Layout&quot; },
+  &quot;scrollAnimations&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Layout&quot; }
+}">
+class Component extends DCLogic {
+  state = { submitted: false };
+
+  renderVals() {
+    return {
+      rootRef: (el) => { this._root = el; if (el) this._setup(); },
+      phHide: String(this.props.hidePlaceholderHighlights ?? false),
+
+      animOn: String(this.props.scrollAnimations ?? true),
+      showEmergency: this.props.showEmergencyBar ?? true,
+      submitLabel: this.state.submitted ? 'Request sent ✓ (template stub)' : 'Send my request',
+      submitQuote: () => {
+        this.setState({ submitted: true });
+        clearTimeout(this._t);
+        this._t = setTimeout(() => this.setState({ submitted: false }), 3000);
+      },
+    };
+  }
+
+  componentDidMount() {
+    this._setup();
+    this._retry = setTimeout(() => this._setup(), 400);
+  }
+
+  componentDidUpdate() {
+    this._reapply();
+  }
+
+  _setup() {
+    if (!this._root || this._observed) return;
+    this._observed = true;
+    this._revealed = new WeakSet();
+    this._counted = new WeakMap();
+
+    // Fallback: in hidden/prerendered/screenshot contexts IntersectionObserver may
+    // never fire — reveal everything immediately instead of leaving sections hidden.
+    if (document.hidden) { this._revealAll(); return; }
+    document.addEventListener('visibilitychange', () => { if (document.hidden) this._revealAll(); });
+
+    // Nav shadow once the page is scrolled
+    const nav = this._root.querySelector('[data-navbar]');
+    if (nav) {
+      const onScroll = () => nav.setAttribute('data-scrolled', String(window.scrollY > 8));
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    // Scroll-reveal
+    const revealEls = this._root.querySelectorAll('[data-reveal]');
+    const io = new IntersectionObserver((entries) => {
+      // Stagger elements that enter the viewport together
+      let i = 0;
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const delay = i * 90;
+          i += 1;
+          el.style.transitionDelay = delay + 'ms';
+          this._revealed.add(el);
+          el.setAttribute('data-reveal', 'on');
+          io.unobserve(el);
+          setTimeout(() => { el.style.transitionDelay = ''; }, 900 + delay);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach((el) => io.observe(el));
+
+    // Count-up stats
+    const counters = this._root.querySelectorAll('[data-count-to]');
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        cio.unobserve(e.target);
+        const el = e.target;
+        const target = parseFloat(el.getAttribute('data-count-to'));
+        const suffix = el.getAttribute('data-suffix') || '';
+        this._counted.set(el, Math.round(target).toLocaleString() + suffix);
+        const t0 = performance.now();
+        const dur = 1600;
+        const tick = (now) => {
+          const p = Math.min(1, (now - t0) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach((el) => cio.observe(el));
+  }
+
+  // Force everything to its revealed end-state (used when observers can't fire)
+  _revealAll() {
+    if (!this._root) return;
+    this._root.querySelectorAll('[data-reveal]').forEach((el) => {
+      this._revealed.add(el);
+      el.setAttribute('data-reveal', 'on');
+    });
+    this._root.querySelectorAll('[data-count-to]').forEach((el) => {
+      const target = parseFloat(el.getAttribute('data-count-to'));
+      const suffix = el.getAttribute('data-suffix') || '';
+      const txt = Math.round(target).toLocaleString() + suffix;
+      this._counted.set(el, txt);
+      el.textContent = txt;
+    });
+  }
+
+  // Re-apply reveal/counter end-states after any React re-render
+  _reapply() {
+    if (!this._root) return;
+    this._root.querySelectorAll('[data-reveal]').forEach((el) => {
+      if (this._revealed && this._revealed.has(el)) el.setAttribute('data-reveal', 'on');
+    });
+    this._root.querySelectorAll('[data-count-to]').forEach((el) => {
+      if (this._counted && this._counted.has(el)) el.textContent = this._counted.get(el);
+    });
+  }
+}
+
+</script>
+</body>
+</html>
